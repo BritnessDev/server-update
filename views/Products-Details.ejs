@@ -1,0 +1,199 @@
+<body>
+
+    <!------------------ Single Product Details ------------------>
+    <div class="small-container single-product">
+        <div class="row">
+            <% products.forEach(function(products) { %>
+                <div class="col-2">
+                    <img src="./uploads/<%= products.Productimg%>" width="100%" id="ProductImg">
+
+                    <div class="small-img-row">
+                        <div class="small-img-col">
+                            <img src="images/FCMI.png" width="100%" class="small-img">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="images/FOD_N.png" width="100%" class="small-img">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="images/FBCP_N.png" width="100%" class="small-img">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="images/FETA_N.png" width="100%" class="small-img">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <p><a href="/">Home</a> /<%= products.productName%>
+                    </p>
+                    <form action="/add-to-cart/" method="post" id="addcart">
+                        <input name="id" style=" height:0px; visibility: hidden;" type="text"
+                            value="<%= products._id %>">
+                        <input name="productName" style=" height:0px; visibility: hidden;" type="text"
+                            value="<%= products.productName%>">
+                        <input name="Price" style=" height:0px; visibility: hidden; " type="text"
+                            value="<%= products.Price %>">
+                        <input name="Price" style=" height:0px; visibility: hidden; " type="text"
+                            value="<%= products.productCategory %>">
+                        <!-- <p style="display: none; height:0px;"><%= products._id %></p> -->
+                        <h1>
+                            <%= products.productName %>
+                        </h1>
+                        <h4>
+                            <%=products.Price%>
+                        </h4>
+                        <input type="number" name="quantity" value="1">
+
+                        <div id="btn"></div>
+                        <p id="block">You need to <span style="font-weight:600; color:red; opacity:inherit !important;">
+                                register and login or login </span> first to add product to your cart</p>
+                        <br><br>
+
+
+                    </form>
+
+                    <h3>Product Details</h3><br>
+                    <p>
+                        <%= products.ProductDetail %>
+                    </p>
+                </div>
+                <% }); %>
+        </div>
+    </div>
+
+    <!------------------ Title ------------------>
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Related Products</h2>
+            <p>View More</p>
+        </div>
+    </div>
+
+
+
+    <!------------------  Products ------------------>
+    <div class="small-container">
+
+        <div class="row">
+            <% related.forEach(function(products) { %>
+                <a class="cart" href="/products/<%= products._id %>">
+                    <div class="col-4">
+                        <img src="./uploads/<%= products.Productimg%>">
+                        <h4>
+                            <%= products.productName %>
+                        </h4>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                        <p>
+                            <%= products.Price %>
+                        </p>
+                    </div>
+                </a>
+                <% }); %>
+        </div>
+    </div>
+
+
+    <!------------------ Js For toggle menu ------------------>
+    <script>
+
+        var MenuItems = document.getElementById("MenuItems");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+
+    <!------------------ Js For Product gallery ------------------>
+    <script>
+        console.log(document.getElementById("add"));
+        var ProductImg = document.getElementById("ProductImg");
+        var SmallImg = document.getElementsByClassName("small-img");
+
+        SmallImg[0].onclick = function () {
+            ProductImg.src = SmallImg[0].src;
+        }
+        SmallImg[1].onclick = function () {
+            ProductImg.src = SmallImg[1].src;
+        }
+        SmallImg[2].onclick = function () {
+            ProductImg.src = SmallImg[2].src;
+        }
+        SmallImg[3].onclick = function () {
+            ProductImg.src = SmallImg[3].src;
+        }
+
+    </script>
+
+    <script>
+        const userT = sessionStorage.getItem("a456b")
+        let b64DecodeUnicode2 = str =>
+            decodeURIComponent(
+                Array.prototype.map.call(atob(str), c =>
+                    '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+                ).join(''))
+
+        let parseJwt2 = token =>
+            JSON.parse(
+                b64DecodeUnicode2(
+                    token.split('.')[1].replace('-', '+').replace('_', '/')
+                )
+            )
+        const user = parseJwt2(userT)
+
+        const addcart = document.getElementById("addcart").action += `${user.id}`
+    </script>
+
+    <script>
+        // Add to Cart button
+
+        let b64DecodeUnicode3 = str =>
+            decodeURIComponent(
+                Array.prototype.map.call(atob(str), c =>
+                    '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+                ).join(''))
+
+        let parseJwt3 = token =>
+            JSON.parse(
+                b64DecodeUnicode3(
+                    token.split('.')[1].replace('-', '+').replace('_', '/')
+                )
+            )
+
+        const as3245 = sessionStorage.getItem("a456b")
+        console.log(as3245);
+        const userData = parseJwt(as3245)
+
+        document.getElementById("addcart").action = `/add-to-cart/${userData.id}`
+
+        var disable;
+        if (as324 == null) {
+            document.getElementById("btn").innerHTML += `<button onclick="Alert()" class="add-to-cart-btn" disabled  id="add"> Add To Cart </button>`
+            document.getElementById("btn").style.opacity = "0.5"
+        } else {
+            document.getElementById("btn").innerHTML += `<button  onclick="Alert()" class="add-to-cart-btn"  id="add"> Add To Cart </button>`
+            document.getElementById("block").style.display = "none"
+        }
+
+
+        // if (as324 == null) {
+        //     document.getElementById("btn").innerHTML += `<button class="add-to-cart-btn" disabled  id="add"> Add To Cart </button>`
+        //     document.getElementById("btn").style.opacity = "0.5"
+        // } else {
+        //     document.getElementById("btn").innerHTML += `<a href="/cart/<%- products[0]._id %>/${userData.id}" class="add-to-cart-btn" disabled  id="add"> Add To Cart </a>`
+        //     document.getElementById("block").style.display = "none"
+        // }
+
+    </script>
+
+</body>
+
+</html>

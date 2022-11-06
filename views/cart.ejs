@@ -1,0 +1,117 @@
+<style>
+    .a435 {
+        padding: 5px 10px;
+        background: #ff523b;
+        border-radius: 50%;
+        text-align: center;
+    }
+
+    .a435 span {
+        color: #fff;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    td input {
+        padding: 0;
+        margin: 0px 5px;
+    }
+</style>
+
+<body>
+
+    <!------------------ Cart Items Details ------------------>
+    <div class="small-container cart-page">
+        <table id="tabela">
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+            <div>
+                <h1>
+                    <% if(data==undefined) { %>
+                        <%= msg %>
+                            <% } %>
+                </h1>
+
+                <% data.forEach((item, i)=> { %>
+                    <tr>
+                        <td>
+                            <div class="cart-info">
+                                <img src="../uploads/<%= item.productId.Productimg %>">
+                                <div>
+                                    <p>
+                                        <%= item.productName %>
+                                    </p>
+                                    <small class="price">Price: $<%= item.Price %></small>
+                                    <br>
+                                    <a class="RemoveBtn" href="/remove-item/<%= item._id %>">Remove</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a class="a435 sub" href="/update-item/<%= item._id %>/sub"><span>-</span></a>
+                            <input type="text" style="text-align: center;" class="cart-quantity-input"
+                            value="<%= item.Quantity %>">
+                            <a class="a435 add" href="/update-item/<%= item._id %>/add"><span> +</span></a>&nbsp;
+                        </td>
+                        <td>$<%= item.Quantity * item.Price %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </div>
+        </table>
+
+        <div class="total-price">
+            <table>
+                <% var Subtotal=0 %>
+                    <% data.forEach((item, i)=> {
+                        Subtotal += item.Quantity * item.Price;
+                        }) %>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td class="cart-total-price">$<%= Subtotal %>.00</td>
+                        </tr>
+                        <tr>
+                            <td>Tax</td>
+                            <td>$15.00</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>$<%= Subtotal-15 %>.00</td>
+                        </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+    b64DecodeUnicode = str => decodeURIComponent( Array.prototype.map.call(atob(str), c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2) ).join(''))
+    parseJwt = token => JSON.parse( b64DecodeUnicode( token.split('.')[1].replace('-', '+').replace('_', '/') ) )
+
+    as324 = sessionStorage.getItem("a456b")
+    console.log("as324", as324);
+
+    if (as324 != null) {
+        a8u = document.querySelectorAll(".add")
+        a8u.forEach(element => {
+            element.href = `${element.pathname}?as33=${as324}`
+        });
+        a9y = document.querySelectorAll(".sub")
+        a9y.forEach(element => {
+            element.href = `${element.pathname}?as33=${as324}`
+        });
+
+        a2y = document.querySelectorAll(".RemoveBtn")
+        // a2y.href = `${a2y.pathname}?as33=${as324}`
+        a2y.forEach(element => {
+            element.href = `${element.pathname}?as33=${as324}`
+        });
+    }
+
+    // const cartTab = document.getElementById("cartTab").href = `/cart?as33=${as324}`
+</script>

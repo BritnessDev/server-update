@@ -1,0 +1,98 @@
+<body>
+
+    <!------------------ account page ------------------>
+
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="/images/logo.png" width="100%">
+                </div>
+                <div class="col-2">
+                    <div class="form-container">
+                        <div class="form-btn">
+                            <span onclick="login()">Login</span>
+                            <span onclick="register()">Register</span>
+                            <hr id="Indicator">
+                        </div>
+                        <form method="post" action="/account" id="LoginForm">
+                            <input type="text" name="user" placeholder="Username">
+                            <input type="password" name="pass" placeholder="Password">
+                            <input type="text" value="login" name="myaction" style="visibility: hidden ; height: 0;"
+                                placeholder="Password">
+
+                            <button type="submit" class="btn">Login</button>
+                            <a href="">FORGET PASSWORD</a>
+                        </form>
+
+                        <!-- Register  -->
+                        <form method="post" action="/account" id="RegForm">
+                            <input type="text" name="username" placeholder="Username">
+                            <input type="email" name="email" placeholder="Email">
+                            <input type="password" name="password" placeholder="Password">
+                            <input type="text" value="register" name="myaction" style="visibility: hidden; height:0;"
+                                placeholder="Password">
+
+                            <button type="submit" class="btn">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!------------------ Js For toggle menu ------------------>
+    <script>
+        const msg = ('<%=msg%>')
+        if (msg != '') {
+            alert(msg)
+        }
+        const ll9 = ('<%=ll9%>')
+        console.log(ll9);
+
+        if (ll9 != "" && ll9.indexOf("Bearer") > -1) {
+            sessionStorage.setItem("a456b", ll9)
+            window.location.href = "/"
+        }
+
+
+
+        var MenuItems = document.getElementById("MenuItems");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+    <!------------------ Js For toggle form ------------------>
+    <script>
+        var LoginForm = document.getElementById("LoginForm");
+        var RegForm = document.getElementById("RegForm");
+        var Indicator = document.getElementById("Indicator");
+
+        function register() {
+            RegForm.style.transform = "translateX(0px)";
+            LoginForm.style.transform = "translateX(0px)";
+            Indicator.style.transform = "translateX(100px)";
+        }
+        function login() {
+            RegForm.style.transform = "translateX(300px)";
+            LoginForm.style.transform = "translateX(300px)";
+            Indicator.style.transform = "translateX(0px)";
+            window.body.href = "/login"
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

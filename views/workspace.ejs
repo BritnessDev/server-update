@@ -1,0 +1,172 @@
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <h1>Give Your Life <br>A New Style!</h1>
+                    <p>Success isn't always about greatness. It's about consistency. Consistency <br>hard work gains
+                        success. Greatness will come.</p>
+                    <a href="/products" class="btn">Explore Now &#8594;</a>
+                </div>
+                <div class="col-2">
+                    <img src="images/company.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!------------ Feature Categories ------------>
+
+    <div class="categories">
+        <div class="small-container">
+            <div class="row">
+                <% featuredcategory.forEach(function(featuredcategory) { %>
+                    
+                    <div class="col-3">
+                        <img src="./uploads/<%= featuredcategory.Catimg%>" alt="">
+                        <p style="text-align: center; font-weight: 600;">
+                            <%= featuredcategory.categoryName %>
+                        </p>
+                    </div>
+                    <% }); %>
+
+            </div>
+        </div>
+    </div>
+    <!------------ Feature Products ------------>
+
+    <div class="small-container">
+        <h2 class="title">Featured Products</h2>
+        <div class="row">
+            <% featuredproducts.forEach(function(featuredproducts) { %>
+                <a class="cart" href="/products/<%= featuredproducts._id %>">
+                <div class="col-4">
+                    <img src="./uploads/<%= featuredproducts.Productimg%>">
+                    <p style="visibility:hidden; height:0;">
+                        <%= featuredproducts._id %>
+                    </p>
+                    <h4>
+                            <%= featuredproducts.productName %>
+                    </h4>
+                    <div class="rating">
+                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    </div>
+                    <p>
+                        <%= featuredproducts.Price %>
+                    </p>
+                </div>
+            </a>
+                <% }); %>
+        </div>
+        <!------------ Latest Products ------------>
+        <h2 class="title">Latest Products</h2>
+        <div class="row">
+            <% products.forEach(function(products) { %>
+                <a class="cart" href="/products/<%= products._id %>">
+                <div class="col-4">
+                    <img src="./uploads/<%= products.Productimg%>">
+                    <p style="visibility:hidden; height:0;">
+                        <%= products._id %>
+                    </p>
+                    <h4>
+                            <%= products.productName %>
+                        </h4>
+                    <div class="rating">
+                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    </div>
+                    <p>
+                        <%= products.Price %>
+                    </p>
+                </div>
+            </a>    
+                <% }); %>
+        </div>
+
+        <!------------ Latest Products Row 2 ------------>
+        <div class="row">
+
+
+
+        </div>
+    </div>
+
+    <!------------ Offer ------------>
+    <div class="offer">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="images/offer1.png" class="offer-img">
+                </div>
+                <div class="col-2">
+                    <p>Exclusively Available On FUJIKA</p>
+                    <h1>FBCP_N</h1>
+                    <small>ss316 Stainless Steel، 1/2 horsepower 220 volts، Moderate and regular pressure at 1.5 bar،
+                        Saving in water and electricity،
+                        Regular pressure and when using a tap and up to 6 taps، Stainless steel, rust- and
+                        salt-resistant،
+                        316 food grades، Withstands liquid temperature up to 100°C.<br></small>
+                    <a href="./products" class="btn">Buy Now &#8594;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!------------------ tistimonial ------------------>
+    <div class="tistimonial">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <span style='font-size:34px; color:#ff523b;'>&#8267;</span>
+                    <p>CEO & Commercial Manager at Ahed Aljazeera Co. GM@Aljayatwa Trading Est. Ltd. +966554482100. </p>
+                    <div class="fixedRating">
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span style='font-size:12px; color:#777'>&#9733;</span>
+                    </div>
+                    <img src="images/mohjayatwa.jpg">
+                    <h3>ENG. Mohamed Jayatwa</h3>
+                </div>
+                <div class="col-3">
+                    <span style='font-size:34px; color:#ff523b;'>&#8267;</span>
+                    <p>CEO & Commercial Manager at Ahed Aljazeera Co. GM@Aljayatwa Trading Est. Ltd. +966554482100. </p>
+                    <div class="fixedRating">
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span style='font-size:12px; color:#777;'>&#9733;</span>
+                    </div>
+                    <img src="images/abuabd.png">
+                    <h3>ENG. Abo abdallah</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------ brands ------------------>
+
+    <div class="brands">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="images/logo.png">
+                </div>
+                <div class="col-5">
+                    <img src="images/japan1.png">
+                </div>
+                <div class="col-5">
+                    <img src="images/japan2.png">
+                </div>
+                <div class="col-5">
+                    <img src="images/japan3.png">
+                </div>
+                <div class="col-5">
+                    <img src="images/japan4.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

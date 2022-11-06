@@ -1,0 +1,163 @@
+<style>
+    .dropdown {
+        border: 4px solid lightgray;
+        position: relative;
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: -4px;
+        top: 30px;
+        background-color: #f9f9f9;
+        min-width: 115px;
+        box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+        padding: 12px 10px;
+        z-index: 1;
+    }
+
+    .dropdown-content div {
+        border-bottom: 1px solid lightgray;
+        padding: 5px 0px;
+    }
+
+    .dropdown-content div:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .side {
+        border: 1px solid lightgray;
+    }
+
+    .asd {
+        border: 1px solid lightgray;
+    }
+</style>
+
+<body>
+
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>All Products</h2>
+            <div class="dropdown">
+                <span id="w3"> Choose filter </span>
+                <div class="dropdown-content">
+                    <div>
+                        <a class="dropdown-item filters" href="<%= process.env.url %>/products?filter=default">Sort by
+                            Latest </a>
+                    </div>
+                    <div>
+                        <a class="dropdown-item filters" href="<%= process.env.url %>/products?filter=price">Sort by
+                            Price</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; ">
+            <div class="side" style="width: 250px; height: fit-content;">
+                <div>
+                    <h2 style="padding: 10px 5px;"> Categories </h2>
+                </div>
+                <div class="asd" style="padding: 10px 5px;">
+                    <a href="/products">
+                        All Products
+                    </a>
+                </div>
+                <% categories.forEach(function(item) { %>
+                    <div class="asd" style="padding: 10px 5px;">
+                        <a href="/products?category=<%= item.categoryName %>">
+                            <%= item.categoryName %>
+                        </a>
+                    </div>
+                    <% }); %>
+            </div>
+            <div class="pro" style="max-width: 900px; width: 100%;">
+                <div class="row">
+                    <% products.forEach(function(products) { %>
+                        <a class="cart" href="/products/<%= products._id %>">
+                            <div class="col-4">
+                                <img src="./uploads/<%= products.Productimg%>">
+                                <p style="visibility:hidden; height:0;">
+                                    <%= products._id %>
+                                </p>
+                                <h4>
+                                    <%= products.productName %>
+                                </h4>
+                                <div class="rating">
+                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                </div>
+                                <p>
+                                    <%= products.Price %>
+                                </p>
+                            </div>
+                        </a>
+                        <% }); %>
+                </div>
+            </div>
+        </div>
+
+        <%= products.total %>
+
+            <div class="page-btn" id="page-btn"></div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+    const total = ('<%=total%>')
+    const itemPerPage = ('<%=itemPerPage%>')
+    const div = total / itemPerPage;
+    console.log("div", div);
+
+    if (div > 1) {
+        for (let i = 0; i < div; i++) {
+            document.getElementById("page-btn").innerHTML += `<a href="/products?page=${i + 1}">  <span>${i + 1}</span></a>`
+        }
+    }
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    console.log(params);
+    console.log(params.filter);
+    if (params.filter != undefined) {
+        let myFilter = document.getElementById("w3");
+        params.filter == "price" ? myFilter.innerText = "Sort by Price" : myFilter.innerText = "Sort by Latest"
+
+    } else {
+        let myFilter = document.getElementById("w3");
+        myFilter.innerText = "Choose filter"
+    }
+
+
+    b64DecodeUnicode = str => decodeURIComponent(Array.prototype.map.call(atob(str), c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''))
+    parseJwt = token => JSON.parse(b64DecodeUnicode(token.split('.')[1].replace('-', '+').replace('_', '/')))
+
+    as324 = sessionStorage.getItem("a456b")
+    console.log("as324", as324);
+
+    // if (as324 != null) {
+    //     a2y = document.querySelectorAll(".filters")
+    //     a2y.forEach(element => {
+    //         element.href = `${window.location.pathname}?filter=${"default"}`
+    //         if (params.page != undefined) {
+    //             element.href = `${window.location.pathname}&&page=${params.page}`
+    //         }
+    //     });
+    // }
+
+    // function name(params) {
+    //     window
+    // }
+
+</script>

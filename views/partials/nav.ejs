@@ -1,0 +1,155 @@
+<div class="container">
+    <div class="navbar" id="navbar">
+        <div class="logo">
+            <a href="/"><img src="images/logo.PNG" width="125px"></a>
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <!-- <li><a href="">About</a></li> -->
+                <!-- <li><a href="">Contact</a></li> -->
+                <li><a id="act" href="/account">Account</a></li>
+                <li><a id="Logout" href="/" onclick="logOUT()">Logout</a></li>
+                <li><a id="dashboadTab" href="/dashboard">Dashboard</a></li>
+            </ul>
+        </nav>
+        <a href="/cart" id="cartTab"><img src="images/cart.png" width="30px" height="30px"></a>
+        <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+    </div>
+    <div class="mobile-nav">
+        <nav class="mob">
+            <div class="logo">
+                <a href="/"><img src="images/logo.PNG" width="125px"></a>
+            </div>
+            <div class="icons-mob-nav">
+                <div class="i1">
+                    <a href="/cart" id="cartTab">
+                        <img src="images/cart.png" width="30px" height="30px">
+                    </a>
+                </div>
+                <div class="i2">
+                    <img src="images/menu.png" id="menu" style="position:relative ; cursor: pointer;" class="menu-icon"
+                        onclick="menutoggle()">
+                    <img src="images/close.png" id="close" onclick="closeNav()" class="close" style="margin-top: -60px;"
+                        alt="close">
+                </div>
+            </div>
+        </nav>
+        <div id="drop" class="mobile-opt">
+            <ul class="mob-ul">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <!-- <li><a href="">About</a></li> -->
+                <!-- <li><a href="">Contact</a></li> -->
+                <li><a id="Logout2" href="/" onclick="logOUT()">Logout</a></li>
+                <li><a id="act2" href="/account">Account</a></li>
+                <li><a id="dashboadTab2" href="/dashboard">Dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    function menutoggle() {
+        document.getElementById("drop").style.top = "0px"
+        document.getElementById("menu").style.transform = "scaleY(0)"
+        document.getElementById("close").style.transform = "scaleX(1)"
+    }
+
+    function closeNav() {
+        document.getElementById("drop").style.top = "-300px"
+        document.getElementById("menu").style.transform = "scaleY(1)"
+        document.getElementById("close").style.transform = "scaleX(0)"
+    }
+</script>
+
+
+<script>
+    // Dashboard
+
+    b64DecodeUnicode = str =>
+        decodeURIComponent(
+            Array.prototype.map.call(atob(str), c =>
+                '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+            ).join(''))
+
+    parseJwt = token =>
+        JSON.parse(
+            b64DecodeUnicode(
+                token.split('.')[1].replace('-', '+').replace('_', '/')
+            )
+        )
+
+
+    as324 = sessionStorage.getItem("a456b")
+    console.log(as324);
+
+    if (as324 == null) {
+        const cartTab = document.getElementById("cartTab").style.display = "none"
+        const dashboadTab = document.getElementById("dashboadTab").style.display = "none"
+        const dashboadTab2 = document.getElementById("dashboadTab2").style.display = "none"
+        
+        const act = document.getElementById("act").style.display = "inline-block"
+        const act2 = document.getElementById("act2").style.display = "inline-block"
+        const Logout = document.getElementById("Logout").style.display = "none"
+        const Logout2 = document.getElementById("Logout2").style.display = "none"
+
+        
+    } else {
+        const cartTab = document.getElementById("cartTab").href = `/cart?as33=${as324}`
+        const act = document.getElementById("act").style.display = "none"
+        const act2 = document.getElementById("act2").style.display = "none"
+        const Logout = document.getElementById("Logout").style.display = "inline-block"
+        const Logout2 = document.getElementById("Logout2").style.display = "inline-block"
+
+        document.getElementById("Logout").addEventListener("click", () => {
+            sessionStorage.removeItem("a456b")
+        })
+        
+        
+        
+        
+        const userData = parseJwt(as324)
+        console.log(userData ,);
+        // console.log();
+        // if(userData != 1){
+            
+        //     const Cartbtn = document.getElementsByClassName("add-to-cart-btn").style.display = "none"
+        // }else{
+        //     const Cartbtn = document.getElementById("addToCart").style.display = "inline-block"
+        // }
+
+        if (userData.role == "admin") {
+            document.getElementById("dashboadTab").style.display = "inline-block"
+
+        } else {
+            document.getElementById("dashboadTab").style.display = "none"
+
+        }
+
+        if(userData.role == "public"){
+
+        }
+
+    }
+    console.log(cartTab);
+
+
+</script>
+
+
+<script>
+
+    as = ["/dashboard", "/add-product", "/product-table", "/category-table", "/add-category"]
+    if (as.includes((window.location.pathname)) == true) {
+        document.getElementById("navbar").style.display = "none"
+    }
+
+    function logOUT() {
+        sessionStorage.removeItem('a456b')
+    }
+
+</script>
